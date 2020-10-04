@@ -4,8 +4,15 @@ const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const Manager = require('./lib/Manager')
 
+const teamArray = []
 
-const employeeManager = () => {
+const employeeManager = (managerData) => {
+ 
+  console.log(`
+  ====================
+  New Team Add Manager
+  ====================
+  `);
     return inquirer.prompt([
       {
         type: "input",
@@ -62,12 +69,68 @@ const employeeManager = () => {
     ])
     .then(({ name, id, email, officenum}) => {
         const manager = new Manager(name, id, email, officenum)
-        console.log(manager)
+        teamArray.push(manager)
+        console.dir(manager.name)
     })
   };
   
+  const employeeCreation = () => {
+    
+    console.log(`
+    ====================
+    Add New Team Member
+    ====================
+    `);
+    return inquirer.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is your name?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter your name");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your employee id",
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please enter your employee id");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email address: ",
+        validate: (emailInput) => {
+          if (emailInput) {
+            return true;
+          } else {
+            console.log("Please enter your email address");
+            return false;
+          }
+        },
+      }, 
+    ])
+    .then(({ name, id, email, officenum}) => {
+        const manager = new Manager(name, id, email, officenum)
+        
+    })
+  };
 
+ 
   employeeManager()
+  
 
 // var allEmployees = []
 
