@@ -5,7 +5,7 @@
             return `            
             <div class="card">
             <div class='card-header manager'>
-                <h4>${manager.getName()}</h4>
+                <h3>${manager.getName()}</h3>
                 <h4>${manager.getRole()}</h4>
             </div>
             <div class="card-body">
@@ -23,7 +23,7 @@
             return `
             <div class="card">
             <div class='card-header manager'>
-                <h4>${engineer.getName()}</h4>
+                <h3>${engineer.getName()}</h3>
                 <h4>${engineer.getRole()}</h4>
             </div>
             <div class="card-body">
@@ -40,7 +40,7 @@
             return `
             <div class="card">
             <div class='card-header manager'>
-                <h4>${intern.getName()}</h4>
+                <h3>${intern.getName()}</h3>
                 <h4>${intern.getRole()}</h4>
             </div>
             <div class="card-body">
