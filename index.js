@@ -1,8 +1,10 @@
-const fs = require('fs')
 const inquirer = require('inquirer')
+const generatePage = require("./src/generate-page");
+const fs = require('fs')
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const Manager = require('./lib/Manager')
+
 
 const teamArray = []
 const newTeam = function() {
@@ -70,7 +72,7 @@ const newTeam = function() {
       .then(({ name, id, email, officenum}) => {
           const manager = new Manager(name, id, email, officenum)
           teamArray.push(manager)
-          console.log(name, id)
+          console.log(teamArray)
           employeeCreation()
       })
     };
@@ -158,9 +160,9 @@ const newTeam = function() {
   }, 
 ])
 .then(({ name, id, email, github}) => {
-    const manager = new Manager(name, id, email, github)
-    teamArray.push(manager)
-    console.log(github)
+    const engineer = new Engineer(name, id, email, github)
+    teamArray.push(engineer)
+    console.log(teamArray)
     employeeCreation()
 })
  }
@@ -221,14 +223,30 @@ const newTeam = function() {
     }, 
   ])
   .then(({ name, id, email, school}) => {
-      const manager = new Manager(name, id, email, school)
-      teamArray.push(manager)
+      const intern = new Intern(name, id, email, school)
+      teamArray.push(intern)
+      console.log(teamArray)
       employeeCreation()
   })
  }
 
- const finishTeam = () => {}
+const finishTeam = function() {
+  const teamStuff = generatePage(teamArray)
 
+  writeToFile(teamStuff)
+}
+
+
+ 
+const writeToFile = (team) => {
+  fs.writeFile('./dist/README.md', team , err =>{
+    if (err) {
+      throw err;
+    } else {
+      console.log('file Created')
+    }
+  })
+}
 
  employeeManager()
 
