@@ -1,19 +1,57 @@
 
-    const parent = team => {
+    const parent = function(team) {
         console.log(team)
         const managerCard = manager => {
-            return ``
-    
-    
-    
+            return `            
+            <div class="card">
+            <div class='card-header manager'>
+                <h4>${manager.getName()}</h4>
+                <h4>${manager.getRole()}</h4>
+            </div>
+            <div class="card-body">
+              <ul class='list-group'> 
+                <li class="list-group-item">ID: ${manager.getId()}</li>
+                <a class="list-group-item" href="mailto:${manager.getEmail()}">Email</a>
+                <li class='list-group-item'>Office #: ${manager.officeNumber()}</li>
+              </ul>  
+            </div>
+          </div>
+          `
         }
     
-        const engineerCard = function() {
-            console.log()
+        const engineerCard = function(engineer) {
+            return `
+            <div class="card">
+            <div class='card-header manager'>
+                <h4>${engineer.getName()}</h4>
+                <h4>${engineer.getRole()}</h4>
+            </div>
+            <div class="card-body">
+              <ul class='list-group'> 
+                <li class="list-group-item">ID: ${engineer.getId()}</li>
+                <a class="list-group-item" href="mailto:${engineer.getEmail()}">Email</a>
+                <a class='list-group-item' href="https://github.com/${engineer.getGithub()}">GitHub</a>
+              </ul>  
+            </div>
+          </div>`
         }
     
-        const InternCard = function() {
-            console.log()
+        const InternCard = function(intern) {
+            return `
+            <div class="card">
+            <div class='card-header manager'>
+                <h4>${intern.getName()}</h4>
+                <h4>${intern.getRole()}</h4>
+            </div>
+            <div class="card-body">
+              <ul class='list-group'> 
+                <li class="list-group-item">ID: ${intern.getId()}</li>
+                <a class="list-group-item" href="mailto:${intern.getEmail()}">Email</a>
+                <li class='list-group-item'>School Name: ${intern.getSchool()}</li>
+              </ul>  
+            </div>
+          </div>
+            `
         }
        
         
@@ -25,12 +63,12 @@
         );
         html.push(team
             .filter(employee => employee.getRole() === "Engineer")
-            .map(engineer => generateEngineer(engineer))
+            .map(engineer => engineerCard(engineer))
             .join("")
         );
         html.push(team
             .filter(employee => employee.getRole() === "Intern")
-            .map(intern => generateIntern(intern))
+            .map(intern => InternCard(intern))
             .join("")
         );
     
@@ -44,32 +82,35 @@
 
         return `
         <!DOCTYPE html>
-        <html lang="en">
-      
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <title>Portfolio Demo</title>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-          <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-          <link rel="stylesheet" href="style.css">
-        </head>
-      
-        <body>
-          <header>
-            <div class="container flex-row justify-space-between align-center py-3">
-              <h1 class="page-title text-secondary bg-dark py-2 px-3">My Team</h1>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My Team</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c502137733.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 jumbotron mb-3 team-heading">
+                <h1 class="text-center">My Team</h1>
             </div>
-          </header>
-          <main class="container my-5">
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card-deck team-area col-12 d-flex justify-content-center">
                 ${parent(team)}
-                
-          </main>
-          <footer class="container text-center py-3">
-            <h3 class="text-dark">&copy; ${new Date().getFullYear()} by Richard Flores</h3>
-          </footer>
-        </body>
-        </html>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
         `;
     };

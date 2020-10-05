@@ -239,7 +239,7 @@ const finishTeam = function() {
 
  
 const writeToFile = (team) => {
-  fs.writeFile('./dist/README.md', team , err =>{
+  fs.writeFile('./dist/index.html', team , err =>{
     if (err) {
       throw err;
     } else {
