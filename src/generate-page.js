@@ -1,6 +1,11 @@
 
-    const parent = function(team) {
-        console.log(team)
+    const parent = function(generate) {
+        const group = [];
+    
+        group.push(generate
+            .filter(employee => employee.getRole() === "Manager")
+            .map(manager => managerCard(manager))
+        );
         const managerCard = manager => {
             return `            
             <div class="card">
@@ -18,7 +23,12 @@
           </div>
           `
         }
-    
+        
+        group.push(generate
+            .filter(employee => employee.getRole() === "Engineer")
+            .map(engineer => engineerCard(engineer))
+            .join("")
+        );
         const engineerCard = function(engineer) {
             return `
             <div class="card">
@@ -36,6 +46,11 @@
           </div>`
         }
     
+        group.push(generate
+            .filter(employee => employee.getRole() === "Intern")
+            .map(intern => InternCard(intern))
+            .join("")
+        );
         const InternCard = function(intern) {
             return `
             <div class="card">
@@ -54,31 +69,13 @@
             `
         }
        
-        
-        const html = [];
-    
-        html.push(team
-            .filter(employee => employee.getRole() === "Manager")
-            .map(manager => managerCard(manager))
-        );
-        html.push(team
-            .filter(employee => employee.getRole() === "Engineer")
-            .map(engineer => engineerCard(engineer))
-            .join("")
-        );
-        html.push(team
-            .filter(employee => employee.getRole() === "Intern")
-            .map(intern => InternCard(intern))
-            .join("")
-        );
-    
-        return html.join("");
+        return group.join("");
     }
     
 
 
         
-    module.exports = team => {
+    module.exports = generate => {
 
         return `
         <!DOCTYPE html>
@@ -106,7 +103,7 @@
     <div class="container">
         <div class="row">
             <div class="card-deck team-area col-12 d-flex justify-content-center">
-                ${parent(team)}
+                ${parent(generate)}
             </div>
         </div>
     </div>

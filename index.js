@@ -5,9 +5,11 @@ const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const Manager = require('./lib/Manager')
 
-
 const teamArray = []
+
+// 3 functions for all three employee types
 const newTeam = function() {
+  //manager function 
   const employeeManager = () => {
  
     console.log(`
@@ -77,6 +79,7 @@ const newTeam = function() {
       })
     };
     
+    //employee function
     const employeeCreation = () => {
       
       console.log(`
@@ -103,7 +106,7 @@ const newTeam = function() {
       })
 }
 
-
+//engineer functions
  const teamEngineer = () => {
   return inquirer.prompt([
   {
@@ -166,7 +169,7 @@ const newTeam = function() {
     employeeCreation()
 })
  }
-
+//intern function
  const teamIntern = () => {
   return inquirer.prompt([
     {
@@ -229,10 +232,11 @@ const newTeam = function() {
       employeeCreation()
   })
  }
-
+//calls the generate page with the array as a parameter
 const finishTeam = function() {
   const teamStuff = generatePage(teamArray)
 
+  //calls the write function with the generated html
   writeToFile(teamStuff)
 }
 
