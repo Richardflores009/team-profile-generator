@@ -5,133 +5,236 @@ const Intern = require('./lib/Intern')
 const Manager = require('./lib/Manager')
 
 const teamArray = []
-
-const employeeManager = (managerData) => {
+const newTeam = function() {
+  const employeeManager = () => {
  
-  console.log(`
-  ====================
-  New Team Add Manager
-  ====================
-  `);
-    return inquirer.prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "What is your name?",
-        validate: (nameInput) => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log("Please enter your name");
-            return false;
-          }
-        },
-      },
-      {
-        type: "input",
-        name: "id",
-        message: "Enter your employee id",
-        validate: (idInput) => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter your employee id");
-            return false;
-          }
-        },
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "Enter your email address: ",
-        validate: (emailInput) => {
-          if (emailInput) {
-            return true;
-          } else {
-            console.log("Please enter your email address");
-            return false;
-          }
-        },
-      }, 
-      {
-        type: "input",
-        name: "officenum",
-        message: "Enter your office number: ",
-        validate: (officeInput) => {
-          if (officeInput) {
-            return true;
-          } else {
-            console.log("Please enter your office number");
-            return false;
-          }
-        },
-      }, 
-    ])
-    .then(({ name, id, email, officenum}) => {
-        const manager = new Manager(name, id, email, officenum)
-        teamArray.push(manager)
-        console.dir(manager.name)
-    })
-  };
-  
-  const employeeCreation = () => {
-    
     console.log(`
     ====================
-    Add New Team Member
+    New Team Add Manager
     ====================
     `);
-    return inquirer.prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "What is your name?",
-        validate: (nameInput) => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log("Please enter your name");
-            return false;
-          }
+      return inquirer.prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "What is your name?",
+          validate: (nameInput) => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log("Please enter your name");
+              return false;
+            }
+          },
         },
-      },
-      {
-        type: "input",
-        name: "id",
-        message: "Enter your employee id",
-        validate: (idInput) => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter your employee id");
-            return false;
-          }
+        {
+          type: "input",
+          name: "id",
+          message: "Enter your employee id",
+          validate: (idInput) => {
+            if (idInput) {
+              return true;
+            } else {
+              console.log("Please enter your employee id");
+              return false;
+            }
+          },
         },
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "Enter your email address: ",
-        validate: (emailInput) => {
-          if (emailInput) {
-            return true;
-          } else {
-            console.log("Please enter your email address");
-            return false;
-          }
+        {
+          type: "input",
+          name: "email",
+          message: "Enter your email address: ",
+          validate: (emailInput) => {
+            if (emailInput) {
+              return true;
+            } else {
+              console.log("Please enter your email address");
+              return false;
+            }
+          },
+        }, 
+        {
+          type: "input",
+          name: "officenum",
+          message: "Enter your office number: ",
+          validate: (officeInput) => {
+            if (officeInput) {
+              return true;
+            } else {
+              console.log("Please enter your office number");
+              return false;
+            }
+          },
+        }, 
+      ])
+      .then(({ name, id, email, officenum}) => {
+          const manager = new Manager(name, id, email, officenum)
+          teamArray.push(manager)
+          console.log(name, id)
+          employeeCreation()
+      })
+    };
+    
+    const employeeCreation = () => {
+      
+      console.log(`
+      ====================
+      Add New Team Member
+      ====================
+      `);
+      return inquirer.prompt([
+        {
+          type: "list",
+          name: "type",
+          message: "Which type of team member would you like to add?",
+          choices: ["Engineer", "Intern", "Neither"]
         },
-      }, 
-    ])
-    .then(({ name, id, email, officenum}) => {
-        const manager = new Manager(name, id, email, officenum)
-        
-    })
-  };
+      ])
+      .then(({ type }) => {
+        if (type === "Engineer") {
+          teamEngineer();
+        } else if (type === "Intern") {
+          teamIntern();
+        } else {
+          finishTeam();
+        }
+      })
+}
 
- 
-  employeeManager()
-  
 
+ const teamEngineer = () => {
+  return inquirer.prompt([
+  {
+    type: "input",
+    name: "name",
+    message: "What is your name?",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter your name");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "Enter your employee id",
+    validate: (idInput) => {
+      if (idInput) {
+        return true;
+      } else {
+        console.log("Please enter your employee id");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "Enter your email address: ",
+    validate: (emailInput) => {
+      if (emailInput) {
+        return true;
+      } else {
+        console.log("Please enter your email address");
+        return false;
+      }
+    },
+  }, 
+  {
+    type: "input",
+    name: "github",
+    message: "Enter your GitHub username: ",
+    validate: (githubInput) => {
+      if (githubInput) {
+        return true;
+      } else {
+        console.log("Please enter your GitHub username");
+        return false;
+      }
+    },
+  }, 
+])
+.then(({ name, id, email, github}) => {
+    const manager = new Manager(name, id, email, github)
+    teamArray.push(manager)
+    console.log(github)
+    employeeCreation()
+})
+ }
+
+ const teamIntern = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your name?",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter your name");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Enter your employee id",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter your employee id");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter your email address: ",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter your email address");
+          return false;
+        }
+      },
+    }, 
+    {
+      type: "input",
+      name: "school",
+      message: "Enter school name: ",
+      validate: (githubInput) => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("Please enter school name");
+          return false;
+        }
+      },
+    }, 
+  ])
+  .then(({ name, id, email, school}) => {
+      const manager = new Manager(name, id, email, school)
+      teamArray.push(manager)
+      employeeCreation()
+  })
+ }
+
+ const finishTeam = () => {}
+
+
+ employeeManager()
+
+};
+
+newTeam()
 // var allEmployees = []
 
 // var firstName = 'bob'
