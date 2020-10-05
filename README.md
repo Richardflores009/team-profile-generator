@@ -14,4 +14,4 @@ To use file clone repo then go to the file in directory install dependencies "np
 ******************************************************************************************************************************************************************************************************************************
 
 ### Screenshot:
-![alt text](https://raw.githubusercontent.com/Richardflores009/README-Generator/master/IMG/Screen%20Shot%202020-09-27%20at%2021.12.13.pnghttps://raw.githubusercontent.com/Richardflores009/team-profile-generator/master/img/Screen%20Shot%202020-10-04%20at%2022.17.26.png "webpage")
+![alt text](https://raw.githubusercontent.com/Richardflores009/team-profile-generator/master/img/Screen%20Shot%202020-10-04%20at%2022.17.26.png "webpage")
